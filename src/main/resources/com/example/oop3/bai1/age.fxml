@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--        Đây là khai báo phiên bản XML và bộ mã hóa sử dụng trong tệp.-->
+<!--        Thuộc tính version xác định phiên bản của XML sử dụng.-->
+<!--        Thuộc tính encoding xác định bộ mã hóa sử dụng cho tệp. Trong trường hợp này, bộ mã hóa là UTF-8.-->
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+<!--        Đây là khai báo các thành phần (components) JavaFX được sử dụng trong tệp FXML.-->
+<!--        Trong trường hợp này, chúng ta sử dụng 4 thành phần: Button, Label, TextField, và HBox.-->
+
+
+<HBox alignment="CENTER" fx:controller="com.example.oop3.bai1.AgeController" xmlns="http://javafx.com/javafx/20"
+      xmlns:fx="http://javafx.com/fxml/1">
+
+<!--    Đây là khai báo một layout HBox, một container dùng để chứa các thành phần đồ họa ngang hàng với nhau.-->
+<!--    Thuộc tính alignment xác định cách căn chỉnh các thành phần trong container. Trong trường hợp này, các thành phần được căn giữa bằng thuộc tính CENTER.-->
+<!--    Thuộc tính fx:controller xác định tên của lớp điều khiển (controller) được sử dụng để xử lý sự kiện và tương tác với các thành phần trong giao diện.-->
+<!--    Các thuộc tính xmlns và xmlns:fx khai báo các namespace (không gian tên) được sử dụng trong tệp FXML. Trong trường hợp này, chúng ta sử dụng namespace http://javafx.com/javafx/20 cho các thành phần JavaFX và http://javafx.com/fxml/1 cho các thuộc tính FXML.-->
+
+
+    <Label text="Nhập năm sinh: "/>
+<!--    Đây là khai báo một label (nhãn) với nội dung là "Nhập năm sinh".-->
+<!--    Thuộc tính text xác định nội dung của nhãn-->
+    <TextField fx:id="year"/>
+
+<!--    Đây là khai báo một text field (ô nhập văn bản) cho người dùng nhập vào năm sinh.-->
+<!--    Thuộc tính fx:id xác định một định danh cho thành phần, được sử dụng bởi lớp điều khiển để truy cập thành phần này.-->
+
+    <Button onAction="#calculateAge" text="Tính tuổi"/>
+<!--    Đây là khai báo một button (nút) với nội dung là "Tính tuổi".-->
+<!--    Thuộc tính onAction xác định đoạn mã xử lý sự kiện sẽ được gọi khi người dùng nhấn vào nút.-->
+<!--    Trong trường hợp này, đoạn mã "calculateAge" sẽ được gọi, có thể được định nghĩa trong lớp điều khiển.-->
+<!--    Thuộc tính text xác định nội dung của nút-->
+</HBox>
+<!--        Tóm lại, tệp FXML này định nghĩa một giao diện đơn giản để nhập năm sinh và tính tuổi bằng cách sử dụng các thành phần JavaFX như label, textfield và button. Layout HBox được sử dụng để chứa các thành phần theo chiều ngang. Thuộc tính fx:controller xác định lớp điều khiển sẽ được sử dụng để xử lý các sự kiện và tương tác với các thành phần trong giao diện. Các thuộc tính khác trong các thành phần định nghĩa các đặc tính của chúng, chẳng hạn như nội dung của label hoặc định danh fx:id của text field.-->

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--        Đây là khai báo phiên bản XML và bộ mã hóa được sử dụng trong tệp FXML.-->
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<!--        Đây là khai báo đối tượng VBox (một hộp chứa các đối tượng trong giao diện người dùng) và các thuộc tính của nó. Thuộc tính "alignment" được sử dụng để căn giữa nội dung của VBox. Thuộc tính "spacing" được sử dụng để thiết lập khoảng cách giữa các đối tượng trong VBox. Thuộc tính "xmlns:fx" được sử dụng để định nghĩa namespace "fx" để sử dụng các annotation trong FXML. Thuộc tính "fx:controller" được sử dụng để liên kết với class controller "HelloController".-->
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+
+      fx:controller="com.example.oop3.bai1.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+<!--    Đây là khai báo đối tượng padding (khoảng cách giữa nội dung và viền của VBox). Chúng ta sử dụng đối tượng Insets để thiết lập khoảng cách cho các phía của VBox.-->
+
+    <Label fx:id="welcomeText"/>
+<!--    Đây là khai báo đối tượng Label (một nhãn trong giao diện người dùng) và sử dụng annotation "fx:id" để đánh dấu rằng đối tượng này có ID là "welcomeText" và sẽ được liên kết với đối tượng trong class controller.-->
+    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<!--    Đây là khai báo đối tượng Button (một nút trong giao diện người dùng) và sử dụng thuộc tính "text" để hiển thị nội dung của nút. Thuộc tính "onAction" được sử dụng để liên kết với phương thức "onHelloButtonClick" trong class controller khi người dùng nhấn nút này.-->
+</VBox>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop3.bai1.NumberController">
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" text="Đoán số trong khoảng từ 0 đến 100" />
+        <TextField fx:id="guessTextField" layoutX="14.0" layoutY="33.0" prefHeight="25.0" prefWidth="272.0" />
+        <Button fx:id="guessButton" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onAction="#guess" text="Đoán số" />
+    </children>
+</AnchorPane>

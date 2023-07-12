@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.oop3.QuizController">
+    <Label text="Câu hỏi 1: 2+3=?" />
+    <RadioButton fx:id="question1OptionA" text="5" toggleGroup="question1Group" />
+    <RadioButton fx:id="question1OptionB" text="6" toggleGroup="question1Group" />
+    <RadioButton fx:id="question1OptionC" text="7" toggleGroup="question1Group" />
+
+    <Label text="Câu hỏi 2: 1+1=??" />
+    <RadioButton fx:id="question2OptionA" text="2" toggleGroup="question2Group" />
+    <RadioButton fx:id="question2OptionB" text="1" toggleGroup="question2Group" />
+    <RadioButton fx:id="question2OptionC" text="3" toggleGroup="question2Group" />
+
+    <Button text="Nộp bài" onAction="#submitQuiz" />
+    <Label fx:id="question1Result" />
+    <Label fx:id="question2Result" />
+    <Label fx:id="quizSummary" />
+</VBox>
