@@ -4,7 +4,7 @@ public class OddThread extends Thread {
     @Override
     public void run() {
         for (int i = 1; i <= 10; i += 2) {
-            System.out.println("OddThread: " + i);
+            System.out.println("Số lẻ là: " + i);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -14,11 +14,11 @@ public class OddThread extends Thread {
     }
 }
 
-public class EvenThread extends Thread {
+ class EvenThread extends Thread {
     @Override
     public void run() {
         for (int i = 2; i <= 10; i += 2) {
-            System.out.println("EvenThread: " + i);
+            System.out.println("Số chẵn là: " + i);
             try {
                 Thread.sleep(15);
             } catch (InterruptedException e) {
@@ -28,7 +28,7 @@ public class EvenThread extends Thread {
     }
 }
 
-public class TestThread {
+ class TestThread {
     public static void main(String[] args) {
         OddThread oddThread = new OddThread();
         EvenThread evenThread = new EvenThread();

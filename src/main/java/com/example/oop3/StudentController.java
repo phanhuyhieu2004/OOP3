@@ -4,14 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class StudentControllers {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class StudentController implements Initializable {
     @FXML
-    private TableView<Student> studentTable;
+    private TableView<Student> table;
+
 
     @FXML
     private TableColumn<Student, Integer> idColumn;
@@ -20,120 +25,57 @@ public class StudentControllers {
     private TableColumn<Student, String> nameColumn;
 
     @FXML
-    private TableColumn<Student, String> classColumn;
+    private TableColumn<Student, String> emailColumn;
 
     @FXML
-    private TableColumn<Student, Double> scoreColumn;
+    private TableColumn<Student, Integer> ageColumn;
+
+    private ObservableList<Student> studentList;
 
     @FXML
-    private TextField idField;
+    private TextField idText;
 
     @FXML
-    private TextField nameField;
+    private TextField nameText;
 
     @FXML
-    private TextField classField;
+    private TextField emailText;
 
     @FXML
-    private TextField genderField;
+    private TextField ageText;
 
-    @FXML
-    private TextField addressField;
-
-    @FXML
-    private TextField scoreField;
-
-    private ObservableList<Student> students = FXCollections.observableArrayList();
-
-    public void initialize() {
-        // Initialize table columns
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        studentList = FXCollections.observableArrayList();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        classColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
-        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
-
-        // Set table data
-        studentTable.setItems(students);
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+        table.setItems(studentList);
     }
 
-    @FXML
-    void addStudent(ActionEvent event) {
-        // Get input values from fields
-        int id = Integer.parseInt(idField.getText());
-        String name = nameField.getText();
-        String className = classField.getText();
-        String gender = genderField.getText();
-        String address = addressField.getText();
-        double score = Double.parseDouble(scoreField.getText());
+    public void add(ActionEvent e) {
+        int id = Integer.parseInt(idText.getText());
+        String name = nameText.getText();
+        String email = emailText.getText();
+        int age = Integer.parseInt(ageText.getText());
 
-        // Create new student object
-        Student student = new Student(id, name, className, gender, address, score);
+        Student newStudent = new Student(id, name, email, age);
+        studentList.add(newStudent);
 
-        // Add student to list and table
-        students.add(student);
-        studentTable.setItems(students);
-
-        // Clear input fields
-        idField.clear();
-        nameField.clear();
-        classField.clear();
-        genderField.clear();
-        addressField.clear();
-        scoreField.clear();
+        clearInputs();
     }
 
-    @FXML
-    void editStudent(ActionEvent event) {
-        // Get selected student from table
-        Student student = studentTable.getSelectionModel().getSelectedItem();
-
-        if (student != null) {
-            // Get updated values from fields
-            int id = Integer.parseInt(idField.getText());
-            String name = nameField.getText();
-            String className = classField.getText();
-            String gender = genderField.getText();
-            String address = addressField.getText();
-            double score = Double.parseDouble(scoreField.getText());
-
-            // Update student object
-            student.setId(id);
-            student.setName(name);
-            student.setClassName(className);
-            student.setGender(gender);
-            student.setAddress(address);
-            student.setScore(score);
-
-            // Update table
-            studentTable.refresh();
-
-            // Clear input fields
-            idField.clear();
-            nameField.clear();
-            classField.clear();
-            genderField.clear();
-            addressField.clear();
-            scoreField.clear();
-        }
+    public void delete(ActionEvent e) {
+        Student selected = table.getSelectionModel().getSelectedItem();
+        studentList.remove(selected);
     }
 
-    @FXML
-    void deleteStudent(ActionEvent event) {
-        // Get selected student from table
-        Student student = studentTable.getSelectionModel().getSelectedItem();
-
-        if (student != null) {
-            // Remove student from list and table
-            students.remove(student);
-            studentTable.setItems(students);
-
-            // Clear input fields
-            idField.clear();
-            nameField.clear();
-            classField.clear();
-            genderField.clear();
-            addressField.clear();
-            scoreField.clear();
-        }
+    private void clearInputs() {
+        idText.clear();
+        nameText.clear();
+        emailText.clear();
+        ageText.clear();
     }
+
 }

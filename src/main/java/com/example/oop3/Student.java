@@ -1,20 +1,19 @@
 package com.example.oop3;
 
-public class Students {
+public class Student {
     private int id;
     private String name;
-    private String className;
-    private String gender;
-    private String address;
-    private double score;
+    private String email;
+    private int age;
 
-    public Students(int id, String name, String className, String gender, String address, double score) {
+    public Student(int id, String name, String email, int age) {
         this.id = id;
         this.name = name;
-        this.className = className;
-        this.gender = gender;
-        this.address = address;
-        this.score = score;
+        this.email = email;
+        this.age = age;
+    }
+
+    public Student() {
     }
 
     public int getId() {
@@ -33,35 +32,19 @@ public class Students {
         this.name = name;
     }
 
-    public String getClassName() {
-        return className;
+    public String getEmail() {
+        return email;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getGender() {
-        return gender;
+    public int getAge() {
+        return age;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
+    public void setAge(int age) {
+        this.age = age;
     }
 }

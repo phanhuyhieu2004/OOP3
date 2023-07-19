@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.oop3.QuizController">
-    <Label text="Câu hỏi 1: 2+3=?" />
-    <RadioButton fx:id="question1OptionA" text="5" toggleGroup="question1Group" />
-    <RadioButton fx:id="question1OptionB" text="6" toggleGroup="question1Group" />
-    <RadioButton fx:id="question1OptionC" text="7" toggleGroup="question1Group" />
+<VBox xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop3.QuizController">
 
-    <Label text="Câu hỏi 2: 1+1=??" />
-    <RadioButton fx:id="question2OptionA" text="2" toggleGroup="question2Group" />
-    <RadioButton fx:id="question2OptionB" text="1" toggleGroup="question2Group" />
-    <RadioButton fx:id="question2OptionC" text="3" toggleGroup="question2Group" />
+    <VBox alignment="CENTER_LEFT" spacing="10">
 
-    <Button text="Nộp bài" onAction="#submitQuiz" />
-    <Label fx:id="question1Result" />
-    <Label fx:id="question2Result" />
-    <Label fx:id="quizSummary" />
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="question1Label" text="Câu hỏi 1: 2 + 2 = ?" />
+            <RadioButton fx:id="answer1Option1" text="A. 3" />
+            <RadioButton fx:id="answer1Option2" text="B. 4" />
+            <RadioButton fx:id="answer1Option3" text="C. 5" />
+            <Label fx:id="result1Label" />
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="question2Label" text="Câu hỏi 2: 3 x 4 = ?" />
+            <RadioButton fx:id="answer2Option1" text="A. 7" />
+            <RadioButton fx:id="answer2Option2" text="B. 12" />
+            <RadioButton fx:id="answer2Option3" text="C. 9" />
+            <Label fx:id="result2Label" />
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="question3Label" text="Câu hỏi 3: Đội tuyển bóng đá quốc gia Việt Nam có bao nhiêu người?" />
+            <RadioButton fx:id="answer3Option1" text="A. 16" />
+            <RadioButton fx:id="answer3Option2" text="B. 22" />
+            <RadioButton fx:id="answer3Option3" text="C. 18" />
+            <Label fx:id="result3Label" />
+        </HBox>
+
+        <Button fx:id="submitButton" text="Nộp bài" />
+
+    </VBox>
 </VBox>

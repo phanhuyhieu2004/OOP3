@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.MapValueFactory?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.oop3.Student"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop3.StudentController">
 
-</AnchorPane>
+    <TableView fx:id="table" prefHeight="200.0" prefWidth="400.0">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="emailColumn" prefWidth="150.0" text="Email" />
+            <TableColumn fx:id="ageColumn" prefWidth="75.0" text="Age" />
+        </columns>
+    </TableView>
+
+    <TextField fx:id="idText" promptText="ID" />
+    <TextField fx:id="nameText" promptText="Name" />
+    <TextField fx:id="emailText" promptText="Email" />
+    <TextField fx:id="ageText" promptText="Age" />
+
+    <Button fx:id="addButton" text="Add" onAction="#add" />
+    <Button fx:id="deleteButton" text="Delete" onAction="#delete" />
+
+
+</VBox>

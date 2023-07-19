@@ -20,7 +20,6 @@ public class QuizWriter {
             quizInfo += "C. 5\n";
             writer.println(quizInfo);
 
-            // Close the PrintWriter
             writer.close();
             System.out.println("Quiz info has been saved to " + fileName);
         } catch (IOException e) {
