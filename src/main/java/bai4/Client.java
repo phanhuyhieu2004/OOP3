@@ -6,9 +6,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client implements Runnable{
-    @Override
-    public void run() {
+public class Client {
+    public static void main(String[] args) {
+        int serverPort = 8080;
+
         try {
             String severIP = "127.0.0.1";
             int severPort = 8080;

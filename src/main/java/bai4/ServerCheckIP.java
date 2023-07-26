@@ -24,7 +24,6 @@ public class ServerCheckIP {
             // 25[0-5] : lấy số từ 250-255
             // regex0_255 là regex lấy số từ 0-255
             String regex0_255 = "([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])";
-            // so sánh dữ liệu với định dạng xxx.xxx với xxx trong là đoạn 0-255
             if (Pattern.matches(regex0_255 + "\\." + regex0_255, IP)) {
                 repoData(socket,true);
             } else {
