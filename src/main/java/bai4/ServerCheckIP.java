@@ -1,58 +1,60 @@
 package bai4;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
 public class ServerCheckIP {
     public static void main(String[] args) {
-
-        int serverPort = 8080;
+        int serverPort = 8088;
         try {
             ServerSocket serverSocket = new ServerSocket(serverPort);
-            Socket socket = serverSocket.accept();
+            System.out.println("Chủ đã sẵn sàng...");
 
-            String IP = takeData(socket);
+            while (true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("Khách kết nối: " + socket.getInetAddress());
 
-            // [0-9] : lấy trường hợp số từ 0-9
-            // [1-9][0-9] : lấy số hàng chục 10-99
-            // 1[0-9][0-9] : lấy số từ 100 - 199
-            // 2[0-4][0-9] : lấy số từ 200-249
-            // 25[0-5] : lấy số từ 250-255
-            // regex0_255 là regex lấy số từ 0-255
-            String regex0_255 = "([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])";
-            if (Pattern.matches(regex0_255 + "\\." + regex0_255, IP)) {
-                repoData(socket,true);
-            } else {
-                repoData(socket,false);
+                // Lấy địa chỉ IP từ client
+                String IP = readData(socket);
+
+                // Kiểm tra định dạng địa chỉ IP
+                boolean isValidIP = isValidIPAddress(IP);
+
+                // Trả về kết quả cho client
+                sendData(socket, isValidIP);
+
+                socket.close();
             }
-
-            serverSocket.close();
-            socket.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
-    private static String takeData(Socket socket) throws IOException {
-        InputStream inputStream = socket.getInputStream();
-        byte[] bytes = new byte[2048];
-        int readBytes = inputStream.read(bytes);
-        String IP = new String(bytes, 0, readBytes);
-        return IP;
+    private static String readData(Socket socket) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String data = reader.readLine();
+        return data;
     }
 
-    private static void repoData(Socket socket,boolean isIP) throws IOException {
-        // trả về dữ liệu cho client
-        OutputStream outputStream = socket.getOutputStream();
-        if (isIP) {
-            outputStream.write("regex is true!".getBytes());
+    private static void sendData(Socket socket, boolean isValidIP) throws IOException {
+        PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+        if (isValidIP) {
+            writer.println("Hợp lệ");
         } else {
-            outputStream.write("regex is false!".getBytes());
+            writer.println("K hợp lệ.");
         }
+    }
 
+    private static boolean isValidIPAddress(String IP) {
+        // Kiểm tra định dạng địa chỉ IP
+        String regex0_255 = "([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])";
+        String regexIP = regex0_255 + "\\." + regex0_255 + "\\." + regex0_255 + "\\." + regex0_255;
+        boolean isValid = Pattern.matches(regexIP, IP);
+        return isValid;
     }
 }

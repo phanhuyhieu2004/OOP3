@@ -1,3 +1,5 @@
+package bai4;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,13 +10,13 @@ import java.util.Scanner;
 public class ClientCheckIP {
     public static void main(String[] args) {
         String serverHost = "localhost";
-        int serverPort = 8080;
+        int serverPort = 8088;
         try {
             Socket socket = new Socket(serverHost, serverPort);
-            System.out.println("Connected to server...");
+            System.out.println("Đã kết nối với máy chủ...");
 
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter an IP address: ");
+            System.out.print("Nhập IP: ");
             String IP = scanner.nextLine();
 
             // Gửi địa chỉ IP tới server
@@ -22,7 +24,7 @@ public class ClientCheckIP {
 
             // Đọc kết quả từ server
             String result = readData(socket);
-            System.out.println("Result: " + result);
+            System.out.println("Kết quả: " + result);
 
             socket.close();
         } catch (IOException e) {
