@@ -1,19 +1,19 @@
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Test {
 
+    public static void main(String[] args) throws SQLException {
 
-        public static void main(String[] args) throws SQLException {
-//            ConnectJDBC.selectConnect();
-//            ConnectJDBC.insertConnect();
-//            ConnectJDBC.updateConnect();
-            ConnectJDBC.deleteConnect();
-
-        }
+//        ConnectProduct connectProduct=new ConnectProduct();
+//        connectProduct.connect();
+//        ConnectProduct.insertConnection();
+//        ConnectProduct.update1Connection();
+//        ConnectProduct.update2Connection();
+//        ConnectProduct.deleteConnection();
+//        ConnectProduct.getAll();
+//        ConnectProduct.getProductsById(1);
+//        ConnectProduct.getProductsById(2);
+//        ConnectProduct.getProductsByStatus(1);
+        ConnectProduct.getProductsByStatusAndNumber(1,9);
     }
-
-
-
+}
