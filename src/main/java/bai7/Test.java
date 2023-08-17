@@ -29,14 +29,14 @@ public class Test {
         Calculator calculator = new Calculator();
 
         int result = calculator.add(2, 3);
-        System.out.println("Addition: " + result);
+        System.out.println("Phép cộng: " + result);
 
         // Kiểm tra xem phương thức sum() có bị đánh dấu là deprecated hay không
         if (Calculator.class.getMethod("sum", int.class, int.class).isAnnotationPresent(DeprecatedAPI.class)) {
-            System.out.println("Warning: This method is deprecated.");
+            System.out.println("Cảnh báo: Phương pháp này không được dùng nữa.");
             DeprecatedAPI annotation = Calculator.class.getMethod("sum", int.class, int.class).getAnnotation(DeprecatedAPI.class);
-            System.out.println("Deprecated in version: " + annotation.version());
-            System.out.println("Reason: " + annotation.reason());
+            System.out.println("Không dùng  phiên bản: " + annotation.version());
+            System.out.println("Lý do: " + annotation.reason());
         }
     }
 }

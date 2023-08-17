@@ -1,45 +1,59 @@
 package bai5;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 
 public class Client {
-    public static void main(String[] args) throws IOException {
-        String serverIp = "localhost";
-        int serverPort = 12345;
+    public static void main(String[] args) {
+        DatagramSocket clientSocket = null;
+        DatagramPacket sendPacket, receivePacket;
+        byte[] sendData, receiveData;
+        try {
+            // Tạo socket cho máy khách
+            clientSocket = new DatagramSocket();
+            InetAddress serverIP = InetAddress.getByName("localhost");
 
-        DatagramSocket clientSocket = new DatagramSocket();
-
-        String message = "";
-        byte[] sendData;
-        DatagramPacket sendPacket;
-        byte[] receiveData = new byte[1024];
-        DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-
-        while (true) {
-            // Nhập tin nhắn từ bàn phím
-            System.out.print("Enter message (type 'exit' to quit): ");
-            message = System.console().readLine();
-
-            // Nếu tin nhắn là "exit" thì thoát khỏi vòng lặp
-            if (message.equals("exit")) {
-                break;
-            }
-
-            // Gửi tin nhắn đến server
+            // Gửi yêu cầu kết nối tới máy chủ
+            String message = "Chào máy chủ!";
             sendData = message.getBytes();
-            InetAddress serverAddress = InetAddress.getByName(serverIp);
-            sendPacket = new DatagramPacket(sendData, sendData.length, serverAddress, serverPort);
+            sendPacket = new DatagramPacket(sendData, sendData.length, serverIP, 12345);
             clientSocket.send(sendPacket);
 
-            // Nhận phản hồi từ server
-            receivePacket = new DatagramPacket(receiveData, receiveData.length);
-            clientSocket.receive(receivePacket);
-            String responseMessage = new String(receivePacket.getData(), 0, receivePacket.getLength());
-            System.out.println("Received from server: " + responseMessage);
-        }
+            // Nhập tin nhắn từ máy khách và gửi đến máy chủ
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            while (true) {
+                // Nhập tin nhắn từ máy khách
+                System.out.print("Nhập tin nhắn: ");
+                message = input.readLine();
 
-        // Đóng kết nối
-        clientSocket.close();
+                // Kiểm tra tin nhắn đó có phải là "bye" không
+                if (message.equals("bye")) {
+                    sendData = message.getBytes();
+                    sendPacket = new DatagramPacket(sendData, sendData.length, serverIP, 12345);
+                    clientSocket.send(sendPacket);
+                    break;
+                }
+
+                // Gửi tin nhắn đến máy chủ
+                sendData = message.getBytes();
+                sendPacket = new DatagramPacket(sendData, sendData.length, serverIP, 12345);
+                clientSocket.send(sendPacket);
+
+                // Nhận tin nhắn từ máy chủ và in ra màn hình
+                receiveData = new byte[1024];
+                receivePacket = new DatagramPacket(receiveData, receiveData.length);
+                clientSocket.receive(receivePacket);
+                message = new String(receivePacket.getData(), 0, receivePacket.getLength());
+                System.out.println("Đã nhận tin nhắn từ máy chủ: " + message);
+
+                // Kiểm tra tin nhắn đó có phải là "bye" không
+                if (message.equals("bye")) {
+                    break;
+                }
+            }
+            clientSocket.close();
+        } catch (IOException e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
     }
 }

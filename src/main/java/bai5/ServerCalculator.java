@@ -2,16 +2,13 @@ package bai5;
 
 
 
+
+
 import java.io.IOException;
-
 import java.net.DatagramPacket;
-
 import java.net.DatagramSocket;
-
 import java.net.InetAddress;
-
 import java.util.StringTokenizer;
-
 
 public class ServerCalculator {
 
@@ -24,8 +21,6 @@ public class ServerCalculator {
         DatagramSocket serverSocket = new DatagramSocket(serverPort);
 
         System.out.println("Server is running...wating client connect...");
-
-
 
         byte[] receiveData = new byte[1024];
 
@@ -44,13 +39,11 @@ public class ServerCalculator {
         StringTokenizer inputData = new StringTokenizer(operation);
 
 
-
         int number1 = Integer.parseInt(inputData.nextToken());
 
         String operator = inputData.nextToken();
 
         int number2 = Integer.parseInt(inputData.nextToken());
-
 
 
         int result = 0;
@@ -116,4 +109,3 @@ public class ServerCalculator {
     }
 
 }
-

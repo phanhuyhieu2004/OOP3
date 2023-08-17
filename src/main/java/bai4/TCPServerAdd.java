@@ -9,7 +9,7 @@ import java.net.Socket;
 public class TCPServerAdd {
     public static void main(String[] args) {
         // Cổng kết nối của server
-        int serverPort = 8080;
+        int serverPort = 8089;
 
         try {
             // Tạo một ServerSocket để lắng nghe kết nối từ client

@@ -1,11 +1,5 @@
 package bai4;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,56 +8,38 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    private ServerSocket serverSocket;
-    private Socket clientSocket;
-
-    public Server(int port) {
-        try {
-            // Tạo một ServerSocket object để lắng nghe các kết nối đến cổng đã chọn
-            serverSocket = new ServerSocket(port);
-            System.out.println("Server is listening on port " + port);
-
-            // Chấp nhận kết nối từ Client và xử lý thông điệp
-            clientSocket = serverSocket.accept();
-            System.out.println("New client connected: " + clientSocket.getInetAddress().getHostAddress());
-
-            // Tạo luồng đọc tin nhắn từ Client
-            InputStream input = clientSocket.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
-            // Tạo luồng ghi tin nhắn tới Client
-            OutputStream output = clientSocket.getOutputStream();
-            PrintWriter writer = new PrintWriter(output, true);
-
-            // Đọc và gửi tin nhắn liên tục
-            String message;
-            do {
-                // Đọc tin nhắn từ Client và hiển thị lên màn hình console
-                message = reader.readLine();
-                System.out.println("Received message from client: " + message);
-
-                // Nhập tin nhắn từ bàn phím
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                System.out.print("Enter message to send to client (or 'exit' to quit): ");
-                String response = br.readLine();
-
-                // Gửi tin nhắn tới Client                writer.println(response);
-            } while (!message.equals("exit"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Đóng kết nối khi đã xử lý xong
-                clientSocket.close();
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int port = 8080;
-        Server server = new Server(port);
+
+        // Tạo một ServerSocket object để lắng nghe các kết nối đến cổng đã chọn
+        ServerSocket serverSocket = new ServerSocket(port);
+        System.out.println("Máy chủ đang lắng nghe trên cổng " + port);
+
+        // Chấp nhận kết nối từ một máy khách
+        Socket clientSocket = serverSocket.accept();
+        System.out.println("Khách  mới được kết nối: " + clientSocket.getInetAddress().getHostAddress());
+
+        // Tạo luồng đọc tin nhắn từ máy khách
+        BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+        // Tạo luồng ghi tin nhắn tới máy khách
+        PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
+
+        // Đọc và gửi tin nhắn liên tục
+        String message;
+        do {
+            // Đọc tin nhắn từ máy khách và hiển thị lên màn hình console
+            message = input.readLine();
+            System.out.println("Máy khách: " + message);
+
+            // Nhập tin nhắn từ bàn phím và gửi tới máy khách
+            System.out.print("Nhập tin nhắn để gửi cho khách hàng (hoặc 'exit' để thoát): ");
+            message = new BufferedReader(new InputStreamReader(System.in)).readLine();
+            output.println(message);
+        } while (!message.equals("exit"));
+
+        // Đóng kết nối khi đã xử lý xong
+        clientSocket.close();
+        serverSocket.close();
     }
 }

@@ -11,7 +11,7 @@ public class TCPClientAdd {
         // Địa chỉ IP của server
         String serverAddress = "127.0.0.1";
         // Cổng kết nối của server
-        int serverPort = 8080;
+        int serverPort = 8089;
 
         try {
             // Nhập vào hai số nguyên từ bàn phím
