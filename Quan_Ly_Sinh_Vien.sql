@@ -1,33 +1,87 @@
-CREATE DATABASE Quan_Ly_Sinh_Vien;
-USE Quan_Ly_Sinh_Vien;
-CREATE TABLE Khoa (
-    Ma_Khoa VARCHAR(10) PRIMARY KEY,
-    Ten_Khoa NVARCHAR(100),
-    Nam_Thanh_Lap INT
+create database Quan_Ly_Sinh_Vien;
+use Quan_Ly_Sinh_Vien;
+create table Khoa(
+Ten_Khoa varchar(255),
+Ma_Khoa varchar(255),
+Năm_Thanh_Lap int
 );
-INSERT INTO Khoa (Ma_Khoa, Ten_Khoa, Nam_Thanh_Lap)
-VALUES 
-    ('K1', 'Khoa Công nghệ thông tin', 1998),
-    ('K2', 'Khoa Kinh tế', 1995),
-    ('K3', 'Khoa Ngôn ngữ học', 2002),
-    ('K4', 'Khoa Luật', 1990),
-    ('K5', 'Khoa Ngoại ngữ', 1985),
-    ('K6', 'Khoa Quản trị kinh doanh', 2000),
-    ('K7', 'Khoa Khoa học xã hội', 1997),
-    ('K8', 'Khoa Mỹ thuật', 1988),
-    ('K9', 'Khoa Kỹ thuật công trình', 1993),
-    ('K10', 'Khoa Y học', 1975);
-         SELECT * FROM Khoa;
-          SELECT * FROM Khoa WHERE Ma_Khoa = 'K2';
+Alter table Khoa
+add primary key (Ma_Khoa);
+Alter table Khoa
+modify Ten_Khoa varchar(255) after Ma_Khoa;
 
-CREATE TABLE Khoa_Hoc (
-    Ma_Khoa_Hoc VARCHAR(10) PRIMARY KEY,
-    Nam_Bat_Dau INT,
-    Nam_Ket_Thuc INT
+create table Khoa_Hoc(
+Ma_Khoa_Hoc varchar(10) primary key,
+Nam_Bat_Dau int,
+Nam_Ket_Thuc int
+
 );
-INSERT INTO Khoa_Hoc (Ma_Khoa_Hoc, Nam_Bat_Dau, Nam_Ket_Thuc)
-VALUES 
-    ('KH1', 2010, 2014),
+create table Chuong_Trinh_Hoc(
+Ma_CT varchar(45) primary key,
+Ten_CT nvarchar(100)
+);
+create table Lop(
+Ma_Lop varchar(10) primary key,
+Ma_Khoa varchar(255) not null,
+Ma_Khoa_Hoc varchar(10) not null,
+Ma_CT varchar(45) not null,
+STT int,
+foreign key (Ma_Khoa) references Khoa(Ma_Khoa),
+foreign key (Ma_Khoa_Hoc) references Khoa_Hoc(Ma_Khoa_Hoc),
+foreign key (Ma_CT) references Chuong_Trinh_Hoc(Ma_CT)
+);
+create table Sinh_Vien(
+MaSV varchar(45) primary key,
+Ho_Ten nvarchar(100),
+Nam_Sinh int,
+Dan_Toc nvarchar(45),
+Ma_Lop varchar(10) not null,
+foreign key (Ma_Lop) references Lop(Ma_Lop)
+);
+create table Mon_Hoc(
+MaMH varchar (10) primary key,
+Ma_Khoa varchar(255) not null,
+TenMH nvarchar(100),
+foreign key (Ma_Khoa) references Khoa(Ma_Khoa)
+);
+create table Ket_Qua(
+MaSV varchar(45) not null,
+MaMH varchar (10) not null,
+Lan_Thi int not null,
+Diem_Thi float,
+primary key (MaSV,MaMH,Lan_Thi),
+foreign key (MaSV) references Sinh_Vien(MaSV),
+foreign key (MaMH) references Mon_Hoc (MaMH)
+);
+create table Giang_Khoa(
+Ma_CT varchar(45) NOT NULL,
+Ma_Khoa varchar(255) not null,
+MaMH varchar (10) not null,
+Nam_Hoc INT NOT NULL,
+Hoc_Ky int,
+STLT int,
+STTH int,
+So_Tin_Chi INT,
+primary key (Ma_CT,Ma_Khoa,MaMH,Nam_Hoc),
+foreign key (Ma_CT) references Chuong_Trinh_Hoc(Ma_CT),
+foreign key (Ma_Khoa) references Khoa(Ma_Khoa),
+foreign key (MaMH) references Mon_Hoc(MaMH)
+);
+
+
+INSERT INTO Khoa VALUES
+('K1', 'Khoa Công nghệ thông tin', 1998),
+('K2', 'Khoa Kinh tế', 1995),
+('K3', 'Khoa Ngôn ngữ học', 2002),
+('K4', 'Khoa Luật', 1990),
+('K5', 'Khoa Ngoại ngữ', 1985),
+('K6', 'Khoa Quản trị kinh doanh', 2000),
+('K7', 'Khoa Khoa học xã hội', 1997),
+('K8', 'Khoa Mỹ thuật', 1988),
+('K9', 'Khoa thiết kế', 1993),
+('K10', 'Khoa Y học', 1975);
+insert into Khoa_Hoc values
+ ('KH1', 2010, 2014),
     ('KH2', 2015, 2019),
     ('KH3', 2020, 2024),
     ('KH4', 2005, 2009),
@@ -37,14 +91,8 @@ VALUES
     ('KH8', 1985, 1989),
     ('KH9', 1980, 1984),
     ('KH10', 1975, 1979);
-
-CREATE TABLE Chuong_Trinh_Hoc (
-    Ma_CT VARCHAR(10) PRIMARY KEY,
-    Ten_CT NVARCHAR(100)
-);
-INSERT INTO Chuong_Trinh_Hoc (Ma_CT, Ten_CT)
-VALUES 
-    ('CTH1', 'Chương trình học 1'),
+    insert into Chuong_Trinh_Hoc values
+('CTH1', 'Chương trình học 1'),
     ('CTH2', 'Chương trình học 2'),
     ('CTH3', 'Chương trình học 3'),
     ('CTH4', 'Chương trình học 4'),
@@ -54,19 +102,8 @@ VALUES
     ('CTH8', 'Chương trình học 8'),
     ('CTH9', 'Chương trình học 9'),
     ('CTH10', 'Chương trình học 10');
-CREATE TABLE Lop (
-    Ma_Lop VARCHAR(10) PRIMARY KEY,
-    Ma_Khoa VARCHAR(10) NOT NULL,
-    Ma_Khoa_Hoc VARCHAR(10) NOT NULL,
-    Ma_CT VARCHAR(10) NOT NULL,
-    STT INT,
-    FOREIGN KEY (Ma_Khoa) REFERENCES Khoa (Ma_Khoa),
-    FOREIGN KEY (Ma_Khoa_Hoc) REFERENCES Khoa_Hoc (Ma_Khoa_Hoc),
-    FOREIGN KEY (Ma_CT) REFERENCES Chuong_Trinh_Hoc (Ma_CT)
-);
-INSERT INTO Lop (Ma_Lop, Ma_Khoa, Ma_Khoa_Hoc, Ma_CT, STT)
-VALUES 
-    ('L1', 'K1','KH1', 'CTH1', 1),
+    insert into Lop values
+     ('L1', 'K1','KH1', 'CTH1', 1),
     ('L2', 'K2', 'KH2', 'CTH2', 2),
     ('L3', 'K3', 'KH3', 'CTH3', 3),
     ('L4', 'K4', 'KH4', 'CTH4', 4),
@@ -76,18 +113,7 @@ VALUES
     ('L8', 'K8', 'KH8', 'CTH8', 8),
     ('L9', 'K9', 'KH9', 'CTH9', 9),
     ('L10', 'K10', 'KH10', 'CTH10', 10);
-     SELECT * FROM Lop;
-        SELECT * FROM Lop WHERE STT > 1;
-CREATE TABLE Sinh_Vien (
-    MaSV VARCHAR(10) PRIMARY KEY,
-    Ho_Ten NVARCHAR(100),
-    Nam_Sinh INT,
-    Dan_Toc NVARCHAR(20),
-    Ma_Lop VARCHAR(10) NOT NULL,
-    FOREIGN KEY (Ma_Lop) REFERENCES Lop (Ma_Lop)
-);
-INSERT INTO Sinh_Vien (MaSV, Ho_Ten, Nam_Sinh, Dan_Toc, Ma_Lop)
-VALUES 
+    insert into Sinh_Vien values
     ('SV1', 'Nguyễn Văn A', 1995, 'Kinh', 'L1'),
     ('SV2', 'Trần Thị B', 1996, 'Tày', 'L2'),
     ('SV3', 'Lê Văn C', 1997, 'Mường', 'L3'),
@@ -98,17 +124,8 @@ VALUES
     ('SV8', 'Nguyễn Thị H', 2002, 'Hoa', 'L8'),
     ('SV9', 'Trần Văn I', 2003, 'Kinh', 'L9'),
     ('SV10', 'Lê Thị K', 2004, 'Mường', 'L10');
-    SELECT * FROM Sinh_Vien WHERE Dan_Toc = 'Kinh';
-     SELECT * FROM Sinh_Vien;
-CREATE TABLE Mon_Hoc (
-    MaMH VARCHAR(10) PRIMARY KEY,
-    Ma_Khoa VARCHAR(10) NOT NULL,
-    TenMH NVARCHAR(100),
-    FOREIGN KEY (Ma_Khoa) REFERENCES Khoa (Ma_Khoa)
-);
-INSERT INTO Mon_Hoc (MaMH, Ma_Khoa, TenMH)
-VALUES 
-    ('MH1', 'K1', 'Môn học 1'),
+    insert into Mon_Hoc values 
+     ('MH1', 'K1', 'Môn học 1'),
     ('MH2', 'K2', 'Môn học 2'),
     ('MH3', 'K3', 'Môn học 3'),
     ('MH4', 'K4', 'Môn học 4'),
@@ -118,18 +135,8 @@ VALUES
     ('MH8', 'K8', 'Môn học 8'),
     ('MH9', 'K9', 'Môn học 9'),
     ('MH10', 'K10', 'Môn học 10');
-CREATE TABLE Ket_Qua (
-    MaSV VARCHAR(10) NOT NULL,
-    MaMH VARCHAR(10) NOT NULL,
-    Lan_Thi INT NOT NULL,
-    Diem_Thi FLOAT,
-    PRIMARY KEY (MaSV, MaMH, Lan_Thi),
-    FOREIGN KEY (MaSV) REFERENCES Sinh_Vien (MaSV),
-    FOREIGN KEY (MaMH) REFERENCES Mon_Hoc (MaMH)
-);
-INSERT INTO Ket_Qua (MaSV, MaMH, Lan_Thi, Diem_Thi)
-VALUES
-('SV1', 'MH1', 1, 8.5),
+    insert into Ket_Qua values
+    ('SV1', 'MH1', 1, 8.5),
     ('SV2', 'MH2', 1, 7.2),
     ('SV3', 'MH3', 1, 9.0),
     ('SV4', 'MH4', 1, 6.8),
@@ -139,22 +146,7 @@ VALUES
     ('SV8', 'MH8', 1, 6.0),
     ('SV9', 'MH9', 1, 8.2),
     ('SV10', 'MH10', 1, 7.9);
-CREATE TABLE Giang_Khoa (
-    Ma_CT VARCHAR(10) NOT NULL,
-    Ma_Khoa VARCHAR(10) NOT NULL,
-    MaMH VARCHAR(10) NOT NULL,
-    Nam_Hoc INT NOT NULL,
-    Hoc_Ky INT,
-    STLT INT,
-    STTH INT,
-    So_Tin_Chi INT,
-    PRIMARY KEY (Ma_CT, Ma_Khoa, MaMH, Nam_Hoc),
-    FOREIGN KEY (Ma_CT) REFERENCES Chuong_Trinh_Hoc (Ma_CT),
-    FOREIGN KEY (Ma_Khoa) REFERENCES Khoa (Ma_Khoa),
-    FOREIGN KEY (MaMH) REFERENCES Mon_Hoc (MaMH)
-);
-INSERT INTO Giang_Khoa (Ma_CT, Ma_Khoa, MaMH, Nam_Hoc, Hoc_Ky, STLT, STTH, So_Tin_Chi)
-VALUES 
+    insert into Giang_Khoa values
     ('CTH1', 'K1', 'MH1', 2020, 1, 30, 60, 3),
     ('CTH2', 'K2', 'MH2', 2020, 1, 45, 90, 4),
     ('CTH3', 'K3', 'MH3', 2020, 1, 60, 120, 5),
@@ -165,12 +157,10 @@ VALUES
     ('CTH8', 'K8', 'MH8', 2020, 1, 45, 90, 4),
     ('CTH9', 'K9', 'MH9', 2020, 1, 60, 120, 5),
     ('CTH10', 'K10', 'MH10', 2020, 1, 30, 60, 3);
-    DELETE FROM Giang_Khoa 
-WHERE MaMH = 'MH10';
- UPDATE Khoa
-     SET Ten_Khoa = 'Khoa Công nghệ thông tin mới'
-     WHERE Ma_Khoa = 'K1';
+delete from Giang_Khoa where Ma_CT='CTH8';
 
-UPDATE Sinh_Vien
-SET Nam_Sinh = 1997
-WHERE MaSV = 'SV10';
+update Khoa set Ten_Khoa='Yêu' where Ma_Khoa = 'K1';
+select * from Sinh_Vien;
+select * from Sinh_Vien where Dan_Toc='Kinh';
+select Ho_Ten,Nam_Sinh from Sinh_Vien where MaSV='SV8';
+select * from Khoa where Năm_Thanh_Lap<1998;

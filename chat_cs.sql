@@ -1,1 +1,0 @@
-SELECT * FROM chat_database.DataMessage;
