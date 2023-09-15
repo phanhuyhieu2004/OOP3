@@ -1,0 +1,64 @@
+
+#ap_main {
+    -fx-background-image: url('https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-anime-nu-25.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+#button_send {
+
+    -fx-border-color: #3399FF;
+    -fx-background-color: #3366CC
+
+}
+
+#tf_message {
+
+    -fx-border-color: #66FFFF;
+}
+
+
+#vbox_message {
+
+    -fx-padding: 10px;
+    -fx-background-color: #87CEFA;
+
+}
+
+#sp_main {
+    -fx-border-color: aqua;
+
+}
+
+#vbox_message .message {
+    -fx-padding: 5px;
+    -fx-border-color: #99ccff;
+
+
+}
+
+.hBox1  {
+    -fx-alignment: center_right;
+    -fx-padding: 5px 5px 5px 10px;
+}
+.textFlow1 {
+    -fx-color: rgb(239,242,255);
+    -fx-background-color: rgb(15,125,242);
+    -fx-background-radius: 20px;
+    -fx-padding: 5px 10px 5px 10px;
+}
+
+
+.hBox2 {
+    -fx-alignment: center_left;
+    -fx-padding: 5px 5px 5px 10px;
+}
+
+
+.textFlow2 {
+
+    -fx-background-color: #FFC1C1;
+    -fx-background-radius: 20px;
+    -fx-padding: 5px 10px 5px 10px;
+
+}

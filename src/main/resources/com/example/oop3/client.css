@@ -1,0 +1,65 @@
+
+#ap_main {
+    -fx-background-image: url('https://i.pinimg.com/originals/56/f3/91/56f391dc18fc9a5fe6b29fe237bdcf88.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+#button_send {
+
+    -fx-border-color: #CC00CC;
+    -fx-background-color: #FF99CC
+
+}
+
+#tf_message {
+
+
+    -fx-border-color: #FF66FF;
+}
+
+
+#vbox_message {
+
+    -fx-padding: 10px;
+    -fx-background-color: #FFF0F5;
+    -fx-border-radius: 5px;
+
+}
+
+#vbox_message .message {
+    -fx-padding: 5px;
+    -fx-border-color: #99ccff;
+    -fx-border-width: 1px;
+
+}
+
+#sp_main {
+    -fx-border-color: #FF6EB4;
+
+}
+
+.hBox1 {
+    -fx-alignment: center_right;
+    -fx-padding: 5px 5px 5px 10px;
+}
+
+
+.textFlow1 {
+    -fx-color: rgb(239, 242, 255);
+    -fx-background-color: rgb(15, 125, 242);
+    -fx-background-radius: 20px;
+    -fx-padding: 5px 10px 5px 10px;
+}
+
+.hBox2 {
+    -fx-alignment: center_left;
+    -fx-padding: 5px 5px 5px 10px;
+}
+
+.textFlow2 {
+
+    -fx-background-color: #FFC1C1;
+    -fx-background-radius: 20px;
+    -fx-padding: 5px 10px 5px 10px;
+}

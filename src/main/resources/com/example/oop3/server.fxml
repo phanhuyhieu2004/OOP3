@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="ap_main" fx:controller="com.example.oop3.cs.Controller"
+            prefHeight="650" prefWidth="680"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+
+
+    <children>
+        <Button fx:id="button_send" layoutX="350" layoutY="360" text="😍😍😍"/>
+        <TextField fx:id="tf_message" layoutX="70" layoutY="350"
+                   prefWidth="250" prefHeight="40" promptText="Nhắn gửi yêu thương vào đây ahihi 🥰🥰🥰"/>
+        <ScrollPane fx:id="sp_main" layoutX="70" layoutY="70"
+                    prefHeight="256" prefWidth="350" fitToWidth="true">
+            <content>
+                <VBox fx:id="vbox_message" prefHeight="448"
+                      prefWidth="512"/>
+            </content>
+        </ScrollPane>
+
+    </children>
+</AnchorPane>
